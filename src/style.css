@@ -11,9 +11,6 @@
     --default-text-font-family:"Montserrat", sans-serif;
     --card-bg: #064663;
 }
-p{
-    color: var(--text-color-primary);
-}
 body{
     background-color: var(--bg-color);
     font-family: var(--default-text-font-family);
