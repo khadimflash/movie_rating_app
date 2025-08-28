@@ -2,6 +2,9 @@ import './style.css';
 import axios from 'axios';
 import { API_URL, IMG_URL, GENRE_URL, SEARCH_URL, DISCOVER_URL, API_KEY } from './constant.js';
 import { debouncing } from './utils.js';
+import { inject } from "@vercel/analytics";
+
+inject();
 
 const app = document.getElementById('app');
 const searchInput = document.querySelector('.input');
