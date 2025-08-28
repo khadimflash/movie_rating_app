@@ -15,6 +15,9 @@ body{
     background-color: var(--bg-color);
     font-family: var(--default-text-font-family);
 }
+p{
+    color: var(--text-color-primary);
+}
 .header{
     padding: 2rem;
     display: flex;
