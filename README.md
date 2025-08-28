@@ -99,3 +99,9 @@ Distribué sous la licence MIT. Voir le fichier `LICENSE` pour plus d'informatio
 Khadim Gning - [gningkhadim23@gmail.com/ https://github.com/khadimflash]
 
 Lien du projet : [https://github.com/khadimflash/movie_rating_app](https://github.com/khadimflash/movie_rating_app)
+
+---
+
+### Application déployée
+
+Découvrez l'application déployée en ligne ici : [https://movie-rating-app-peach.vercel.app/](https://movie-rating-app-peach.vercel.app/)
