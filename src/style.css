@@ -242,10 +242,14 @@ a:hover {
     .heading-1 {
         font-size: 2rem;
     }
-    .card {
-        width: 100%;
-    }
     #app {
         padding-inline: 15px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        justify-content: center;
+    }
+    .card {
+        width: auto; /* Let grid handle width */
     }
 }
