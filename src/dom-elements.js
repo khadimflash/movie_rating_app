@@ -1,0 +1,11 @@
+export const app = document.getElementById('app');
+export const searchInput = document.querySelector('.input');
+export const ratingSelect = document.querySelector('.rating-select');
+export const tagsEl = document.getElementById('tags');
+export const modal = document.getElementById('trailer-modal');
+export const closeModalBtn = document.querySelector('.close-button');
+export const modalContent = document.querySelector('.modal-content');
+export const trailerContainer = document.getElementById('trailer-container');
+export const loader = document.querySelector('.loader');
+export const clearFiltersBtn = document.querySelector('.clear-filters-btn');
+export const scrollToTopBtn = document.querySelector('.scroll-to-top-btn');

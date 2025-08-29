@@ -3,20 +3,25 @@ import axios from 'axios';
 import { API_URL, IMG_URL, GENRE_URL, SEARCH_URL, DISCOVER_URL, API_KEY } from './constant.js';
 import { debouncing } from './utils.js';
 import { inject } from "@vercel/analytics";
+import { app, searchInput, ratingSelect, tagsEl, modal, closeModalBtn, modalContent, trailerContainer, loader, clearFiltersBtn, scrollToTopBtn } from './dom-elements.js';
+import { PLACEHOLDER_IMAGE_URL, CSS_CLASSES } from './ui-constants.js';
 
 inject();
-
-const app = document.getElementById('app');
-const searchInput = document.querySelector('.input');
-const ratingSelect = document.querySelector('.rating-select');
-const tagsEl = document.getElementById('tags');
-const modal = document.getElementById('trailer-modal');
-const closeModalBtn = document.querySelector('.close-button');
-const trailerContainer = document.getElementById('trailer-container');
 
 const genreMap = new Map();
 let selectedGenres = [];
 let selectedRating = '';
+let page = 1;
+let isLoading = false;
+
+// --- Loader Functions ---
+const showLoader = () => {
+    loader.style.display = 'block';
+};
+
+const hideLoader = () => {
+    loader.style.display = 'none';
+};
 
 // --- API Functions ---
 const getGenres = async (url = GENRE_URL) => {
@@ -31,14 +36,20 @@ const getGenres = async (url = GENRE_URL) => {
     }
 };
 
-const getMovies = async (url) => {
+const getMovies = async (url, page = 1) => {
+    if (isLoading) return;
+    isLoading = true;
+    showLoader();
     try {
-        const response = await axios.get(url);
+        const response = await axios.get(`${url}&page=${page}`);
         const movies = response.data.results;
-        displayMovies(movies);
+        displayMovies(movies, page === 1);
     } catch (error) {
         console.error("Error fetching movies:", error);
         app.innerHTML = '<p class="error">Failed to fetch movies. Please try again later.</p>';
+    } finally {
+        hideLoader();
+        isLoading = false;
     }
 };
 
@@ -47,7 +58,7 @@ const displayGenres = (genres) => {
     tagsEl.innerHTML = '';
     genres.forEach(genre => {
         const t = document.createElement('div');
-        t.classList.add('tag');
+        t.classList.add(CSS_CLASSES.TAG);
         t.id = genre.id;
         t.innerText = genre.name;
         t.addEventListener('click', () => {
@@ -57,46 +68,48 @@ const displayGenres = (genres) => {
                 selectedGenres.push(genre.id);
             }
             highlightSelectedTags();
-            getAndDisplayMovies();
+            handleFilter();
         });
         tagsEl.appendChild(t);
     });
 };
 
 const highlightSelectedTags = () => {
-    const tags = document.querySelectorAll('.tag');
+    const tags = document.querySelectorAll('.' + CSS_CLASSES.TAG);
     tags.forEach(tag => {
-        tag.classList.remove('highlight');
+        tag.classList.remove(CSS_CLASSES.HIGHLIGHT);
     });
     selectedGenres.forEach(id => {
         const tag = document.getElementById(id);
         if (tag) {
-            tag.classList.add('highlight');
+            tag.classList.add(CSS_CLASSES.HIGHLIGHT);
         }
     });
 };
 
-const displayMovies = (movies) => {
-    app.innerHTML = ''; // Clear previous results
+const displayMovies = (movies, clear = true) => {
+    if (clear) {
+        app.innerHTML = '';
+    }
 
-    if (movies.length === 0) {
+    if (movies.length === 0 && clear) {
         app.innerHTML = '<p class="no-results">No movies found.</p>';
         return;
     }
 
-    movies.forEach((movie) => {
+    movies.forEach((movie, index) => {
         const { id, title, poster_path, vote_average, genre_ids } = movie;
         const movieGenres = genre_ids.map(id => genreMap.get(id)).filter(Boolean).join(', ');
 
         const movieCard = document.createElement('div');
-        movieCard.classList.add('card', 'shadow');
+        movieCard.classList.add(CSS_CLASSES.CARD, CSS_CLASSES.SHADOW, CSS_CLASSES.IN_VIEW);
         movieCard.dataset.genreIds = JSON.stringify(genre_ids);
         movieCard.dataset.vote = vote_average;
         movieCard.dataset.movieId = id;
 
         movieCard.innerHTML = `
             <div class="card-image-container">
-                <img src="${poster_path ? IMG_URL + poster_path : 'http://via.placeholder.com/500x750'}" alt="${title}" class="card-image">
+                <img src="${poster_path ? IMG_URL + poster_path : PLACEHOLDER_IMAGE_URL}" alt="${title}" class="card-image">
             </div>
             <div class="movie-details">
                 <p class="title">${title}</p>
@@ -111,49 +124,49 @@ const displayMovies = (movies) => {
             </div>
         `;
         movieCard.addEventListener('click', () => openTrailerModal(id));
-        cardObserver.observe(movieCard);
         app.appendChild(movieCard);
+
+        if (index === movies.length - 1) {
+            infiniteScrollObserver.observe(movieCard);
+        }
     });
 };
 
-const getAndDisplayMovies = async () => {
-    let url;
+const handleSearch = async () => {
+    page = 1;
     const query = searchInput.value.trim();
-
     if (query) {
-        url = `${SEARCH_URL}&query=${query}`;
-        try {
-            const response = await axios.get(url);
-            const movies = response.data.results;
-            const filteredMovies = movies.filter(movie => {
-                const vote = parseFloat(movie.vote_average);
-                const genreIds = movie.genre_ids;
-
-                const ratingMatch = !selectedRating || vote >= selectedRating;
-                const genreMatch = selectedGenres.length === 0 || selectedGenres.every(id => genreIds.includes(id));
-
-                return ratingMatch && genreMatch;
-            });
-            displayMovies(filteredMovies);
-        } catch (error) {
-            console.error("Error fetching and filtering movies:", error);
-            app.innerHTML = '<p class="error">Failed to fetch movies. Please try again later.</p>';
-        }
-        return;
+        const url = `${SEARCH_URL}&query=${query}`;
+        getMovies(url, page);
     } else {
-        let apiUrl = API_URL;
-        if(selectedGenres.length > 0 || selectedRating !==''){
-            apiUrl = `${DISCOVER_URL}&with_genres=${selectedGenres.join(',')}`;
-            if (selectedRating) {
-                apiUrl += `&vote_average.gte=${selectedRating}`;
-            }
-        }
-        getMovies(apiUrl)
+        handleFilter();
     }
 }
 
+const handleFilter = () => {
+    page = 1;
+    let apiUrl = API_URL;
+    if (selectedGenres.length > 0 || selectedRating !== '') {
+        apiUrl = `${DISCOVER_URL}&with_genres=${selectedGenres.join(',')}`;
+        if (selectedRating) {
+            apiUrl += `&vote_average.gte=${selectedRating}`;
+        }
+    }
+    getMovies(apiUrl, page);
+}
+
+const clearFilters = () => {
+    selectedGenres = [];
+    selectedRating = '';
+    searchInput.value = '';
+    ratingSelect.value = '';
+    highlightSelectedTags();
+    handleFilter();
+};
+
 // --- Modal Functions ---
 const openTrailerModal = async (movieId) => {
+    showLoader();
     try {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`);
         const videos = response.data.results;
@@ -175,6 +188,8 @@ const openTrailerModal = async (movieId) => {
         console.error("Error fetching trailer:", error);
         trailerContainer.innerHTML = '<p class="error">Failed to fetch trailer. Please try again later.</p>';
         modal.style.display = 'block';
+    } finally {
+        hideLoader();
     }
 };
 
@@ -183,31 +198,63 @@ const closeModal = () => {
     trailerContainer.innerHTML = ''; // Clear the trailer
 };
 
+// --- Scroll to Top ---
+const handleScroll = () => {
+    if (window.scrollY > 200) {
+        scrollToTopBtn.classList.add('show');
+    } else {
+        scrollToTopBtn.classList.remove('show');
+    }
+};
+
+const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+};
+
 
 // --- Initialization ---
-const cardObserver = new IntersectionObserver((entries, observer) => {
+const infiniteScrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            observer.unobserve(entry.target);
+            page++;
+            let url = API_URL;
+            const query = searchInput.value.trim();
+            if (query) {
+                url = `${SEARCH_URL}&query=${query}`;
+            } else if (selectedGenres.length > 0 || selectedRating !== '') {
+                url = `${DISCOVER_URL}&with_genres=${selectedGenres.join(',')}`;
+                if (selectedRating) {
+                    url += `&vote_average.gte=${selectedRating}`;
+                }
+            }
+            getMovies(url, page);
         }
     });
 }, { threshold: 0.1 });
 
 async function init() {
     await getGenres(GENRE_URL);
-    await getMovies(API_URL);
-    searchInput.addEventListener("input", debouncing(getAndDisplayMovies, 500));
+    await getMovies(API_URL, page);
+    searchInput.addEventListener("input", debouncing(handleSearch, 500));
     ratingSelect.addEventListener('change', (e) => {
         selectedRating = e.target.value;
-        getAndDisplayMovies();
+        handleSearch();
     });
+    clearFiltersBtn.addEventListener('click', clearFilters);
     closeModalBtn.addEventListener('click', closeModal);
-    window.addEventListener('click', (event) => {
+    window.addEventListener('pointerup', (event) => {
         if (event.target === modal) {
             closeModal();
         }
     });
+    modalContent.addEventListener('touchstart', (event) => {
+        event.stopPropagation();
+    });
+    window.addEventListener('scroll', handleScroll);
+    scrollToTopBtn.addEventListener('click', scrollToTop);
 }
 
 init();

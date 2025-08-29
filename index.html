@@ -10,28 +10,39 @@
     <link rel="stylesheet" href="/src/style.css">
   </head>
   <body>
+    <a href="#app" class="skip-to-content-link">Skip to content</a>
     <header class="header">
       <h1 class="heading-1">Movie App</h1>
       <div class="search-container">
-        <input type="text" class="input" placeholder="Search Movie | Genre | Name ">
-        <select name="" id="" class="rating-select">
+        <div class="search-input-container">
+          <span class="material-symbols-outlined search-icon">search</span>
+          <input type="text" class="input" placeholder="Search Movie | Genre | Name ">
+        </div>
+        <select name="" id="" class="rating-select" aria-label="Select a movie rating">
           <option value="">Rating</option>
           <option value="7">7 & above</option>
           <option value="8"> 8 & above</option>
           <option value="8.5">8.5 & above</option>
           <option value="9">9 & above</option>
         </select>
+        <button class="clear-filters-btn" aria-label="Clear all filters">Clear Filters</button>
       </div>
     </header>
     <div id="tags"></div>
     <main id="app">
     </main>
+    <div class="loader"></div>
     <div id="trailer-modal" class="modal">
-      <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <div id="trailer-container"></div>
+      <div class="modal-container">
+        <div class="modal-content">
+          <span class="close-button" aria-label="Close trailer modal"><span class="material-symbols-outlined">
+close
+</span></span>
+          <div id="trailer-container"></div>
+        </div>
       </div>
     </div>
+    <button class="scroll-to-top-btn" aria-label="Scroll to top of the page"><span class="material-symbols-outlined">arrow_upward</span></button>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
