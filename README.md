@@ -40,6 +40,19 @@ Le Movie App est une application web dynamique et moderne conçue pour explorer 
     *   **Axios :** Pour effectuer les requêtes HTTP vers l'API TMDb.
     *   **Vercel Analytics :** Pour le suivi de l'utilisation de l'application.
 
+## Compétences Acquises
+
+Ce projet a permis de développer et de renforcer les compétences suivantes :
+
+*   **Développement Front-end :** Maîtrise de HTML5, CSS3 et JavaScript (ES6+) pour la création d'applications web interactives.
+*   **Intégration d'API :** Utilisation de l'API RESTful de TMDb pour récupérer et afficher des données de manière asynchrone avec Axios.
+*   **Manipulation du DOM :** Création et mise à jour dynamique de l'interface utilisateur en fonction des interactions de l'utilisateur et des données de l'API.
+*   **Environnement de Développement Moderne :** Configuration et utilisation de Vite pour un développement rapide et efficace.
+*   **Contrôle de Version :** Utilisation de Git et GitHub pour le suivi des modifications, la gestion des branches et la collaboration.
+*   **Responsive Design :** Conception d'interfaces qui s'adaptent à différentes tailles d'écran, des mobiles aux ordinateurs de bureau.
+*   **Accessibilité Web :** Implémentation de fonctionnalités pour améliorer l'accessibilité de l'application.
+*   **UI/UX Design :** Application des principes de base de la conception d'interface et d'expérience utilisateur pour créer une application esthétique et facile à utiliser.
+
 ## Installation
 
 Pour configurer et exécuter ce projet localement, suivez ces étapes.
