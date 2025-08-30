@@ -4,45 +4,52 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MovieFlix - Top 250 IMDB Movies</title>
     <meta name="author" content="Khadim Gning">
     <meta name="keywords" content="movie app, IMDB top 250, movie list, film search, movie ratings, movie filter, best movies, cinema">
-    <meta name="description" content="Top 250 IMDB Movie List width,search rating and generated filter">
+    <meta name="description" content="Top 250 IMDB Movie List with search, rating and genre filters.">
     <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
   </head>
   <body>
     <a href="#app" class="skip-to-content-link">Skip to content</a>
+
     <header class="header">
-      <h1 class="heading-1">Movie App</h1>
+      <h1 class="heading-1">MovieFlix</h1>
       <div class="search-container">
         <div class="search-input-container">
           <span class="material-symbols-outlined search-icon">search</span>
-          <input type="text" class="input" placeholder="Search Movie | Genre | Name ">
+          <input type="text" class="input" placeholder="Search for a movie...">
         </div>
-        <select name="" id="" class="rating-select" aria-label="Select a movie rating">
-          <option value="">Rating</option>
-          <option value="7">7 & above</option>
-          <option value="8"> 8 & above</option>
-          <option value="8.5">8.5 & above</option>
-          <option value="9">9 & above</option>
+        <select class="rating-select">
+          <option value="">All Ratings</option>
+          <option value="8">8+</option>
+          <option value="7">7+</option>
+          <option value="6">6+</option>
+          <option value="5">5+</option>
         </select>
-        <button class="clear-filters-btn" aria-label="Clear all filters">Clear Filters</button>
+        <button class="clear-filters-btn">Clear</button>
       </div>
     </header>
+
     <div id="tags"></div>
-    <main id="app">
-    </main>
+    <main id="app"></main>
+
     <div class="loader"></div>
+
     <div id="trailer-modal" class="modal">
       <div class="modal-container">
         <div class="modal-content">
-          <span class="close-button" aria-label="Close trailer modal"><span class="material-symbols-outlined">
-close
-</span></span>
+          <span class="close-button" aria-label="Close trailer modal">&times;</span>
           <div id="trailer-container"></div>
         </div>
       </div>
     </div>
-    <button class="scroll-to-top-btn" aria-label="Scroll to top of the page"><span class="material-symbols-outlined">arrow_upward</span></button>
+
+    <button class="scroll-to-top-btn" aria-label="Scroll to top of the page">
+      <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

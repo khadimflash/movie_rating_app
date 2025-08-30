@@ -7,40 +7,47 @@
 
 ## Description
 
-Le Movie App est une application web dynamique conçue pour explorer et filtrer les 250 meilleurs films d'IMDB. Elle offre une interface intuitive permettant aux utilisateurs de rechercher des films par titre, genre ou nom, et d'appliquer des filtres basés sur les évaluations IMDB.
+Le Movie App est une application web dynamique et moderne conçue pour explorer et filtrer les 250 meilleurs films d'IMDB. Elle offre une interface élégante et intuitive permettant aux utilisateurs de rechercher des films par titre, de filtrer par genre et par note.
+
+## What's New?
+
+- **Refonte de l'interface utilisateur :** L'application a été entièrement repensée avec un design plus moderne et épuré.
+- **Amélioration des cartes de films :** Les cartes de films ont un nouveau look avec une meilleure présentation des informations.
+- **En-tête amélioré :** L'en-tête est maintenant fixe et contient la barre de recherche et les filtres pour un accès facile.
+- **Responsivité accrue :** Le layout a été optimisé pour une expérience utilisateur exceptionnelle sur toutes les tailles d'écran.
 
 ## Fonctionnalités
 
 *   **Liste des 250 meilleurs films IMDB :** Parcourez une liste soigneusement sélectionnée des films les mieux notés sur IMDB.
-*   **Fonctionnalité de recherche avancée :** Trouvez rapidement des films grâce à une barre de recherche complète qui prend en charge les requêtes par titre, genre ou nom.
-*   **Filtrage par évaluation :** Affinez votre recherche en filtrant les films en fonction de leur évaluation IMDB (par exemple, 7 et plus, 8 et plus).
-*   **Filtrage par genre :** Découvrez des films par genre grâce à des tags de genre générés dynamiquement.
-*   **Conception réactive :** Profitez d'une expérience utilisateur fluide et optimisée sur tous les appareils (ordinateurs de bureau, tablettes, mobiles).
+*   **Fonctionnalité de recherche avancée :** Trouvez rapidement des films grâce à une barre de recherche complète.
+*   **Filtrage par évaluation :** Affinez votre recherche en filtrant les films en fonction de leur évaluation IMDB.
+*   **Filtrage par genre :** Découvrez des films par genre grâce à des tags de genre interactifs.
+*   **Bande-annonce en un clic :** Visionnez la bande-annonce de n'importe quel film directement dans l'application.
+*   **Design moderne et réactif :** Profitez d'une expérience utilisateur fluide et optimisée sur tous les appareils.
+*   **Infinite Scroll :** Chargez plus de films en faisant simplement défiler la page.
 
 ## Technologies Employées
-
-Ce projet est développé en utilisant les technologies suivantes :
 
 *   **Frontend :**
     *   **HTML5 :** Langage de balisage standard pour la structuration du contenu web.
     *   **CSS3 :** Langage de feuille de style pour la conception et le style de l'application.
-    *   **JavaScript (ES6+) :** Langage de programmation principal pour les fonctionnalités interactives et la manipulation dynamique du contenu.
+    *   **JavaScript (ES6+) :** Langage de programmation principal pour les fonctionnalités interactives.
 *   **Outils de Développement :**
-    *   **Vite :** Un outil de build rapide et léger pour les projets web modernes, offrant un démarrage rapide et un rechargement à chaud instantané.
-    *   **npm (Node Package Manager) :** Utilisé pour la gestion des dépendances du projet.
-*   **API Externe :**
-    *   **TMDb API (The Movie Database) :** Utilisée pour récupérer les données des films, les images et les informations connexes.
+    *   **Vite :** Un outil de build rapide pour les projets web modernes.
+    *   **npm :** Utilisé pour la gestion des dépendances.
+*   **API & Bibliothèques :**
+    *   **TMDb API :** Pour récupérer les données des films.
+    *   **Axios :** Pour effectuer les requêtes HTTP vers l'API TMDb.
+    *   **Vercel Analytics :** Pour le suivi de l'utilisation de l'application.
 
 ## Installation
 
-Pour configurer et exécuter ce projet localement, suivez ces étapes simples.
+Pour configurer et exécuter ce projet localement, suivez ces étapes.
 
 ### Prérequis
 
-Assurez-vous d'avoir les éléments suivants installés sur votre machine :
-
 *   Node.js (version LTS recommandée)
-*   npm (généralement inclus avec Node.js)
+*   npm (inclus avec Node.js)
 
 ### Étapes
 
@@ -59,15 +66,14 @@ Assurez-vous d'avoir les éléments suivants installés sur votre machine :
 
 ### Configuration de la clé API
 
-Ce projet utilise l'API The Movie Database (TMDb). Vous devez obtenir votre propre clé API et la configurer :
+Ce projet utilise l'API The Movie Database (TMDb). Vous devez obtenir votre propre clé API.
 
-1.  Rendez-vous sur le [site web de TMDb](https://www.themoviedb.org/documentation/api) et inscrivez-vous pour obtenir une clé API.
-2.  Créez un fichier nommé `.env` à la racine de votre projet (dans le même répertoire que `package.json`).
-3.  Ajoutez votre clé API au fichier `.env` au format suivant :
+1.  Inscrivez-vous sur le [site web de TMDb](https://www.themoviedb.org/documentation/api) pour obtenir une clé API.
+2.  Créez un fichier `.env` à la racine de votre projet.
+3.  Ajoutez votre clé API au fichier `.env` :
     ```
     VITE_API_KEY=VOTRE_CLE_API_TMDB
     ```
-    Remplacez `VOTRE_CLE_API_TMDB` par votre véritable clé API.
 
 ## Utilisation
 
@@ -77,18 +83,11 @@ Pour exécuter l'application en mode développement :
 npm run dev
 ```
 
-Cela démarrera le serveur de développement local, et vous pourrez accéder à l'application dans votre navigateur, généralement à l'adresse `http://localhost:5173/`.
+L'application sera accessible à l'adresse `http://localhost:5173/`.
 
 ## Contribution
 
-Si vous avez une suggestion qui pourrait améliorer ce projet, veuillez forker le dépôt et créer une pull request. Vous pouvez également simplement ouvrir une issue avec le tag "enhancement".
-N'oubliez pas de donner une étoile au projet ! Merci encore !
-
-1.  Forkez le projet.
-2.  Créez votre branche de fonctionnalité (`git checkout -b feature/NomDeVotreFonctionnalite`).
-3.  Commitez vos modifications (`git commit -m 'feat: Ajout d'une nouvelle fonctionnalité'`).
-4.  Poussez vers la branche (`git push origin feature/NomDeVotreFonctionnalite`).
-5.  Ouvrez une Pull Request.
+Les contributions sont les bienvenues ! N'hésitez pas à forker le projet et à créer une pull request.
 
 ## Licence
 
@@ -96,7 +95,7 @@ Distribué sous la licence MIT. Voir le fichier `LICENSE` pour plus d'informatio
 
 ## Contact
 
-Khadim Gning - [gningkhadim23@gmail.com/ https://github.com/khadimflash]
+Khadim Gning - [gningkhadim23@gmail.com](mailto:gningkhadim23@gmail.com) - [https://github.com/khadimflash](https://github.com/khadimflash)
 
 Lien du projet : [https://github.com/khadimflash/movie_rating_app](https://github.com/khadimflash/movie_rating_app)
 

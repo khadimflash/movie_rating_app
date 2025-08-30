@@ -1,5 +1,7 @@
 import './style.css';
 import axios from 'axios';
+
+
 import { API_URL, IMG_URL, GENRE_URL, SEARCH_URL, DISCOVER_URL, API_KEY } from './constant.js';
 import { debouncing } from './utils.js';
 import { inject } from "@vercel/analytics";
@@ -258,3 +260,39 @@ async function init() {
 }
 
 init();
+
+// --- Accessibility ---
+const setupAccessibility = () => {
+    const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const modalFocusableElements = modal.querySelectorAll(focusableElements);
+    const firstFocusableElement = modalFocusableElements[0];
+    const lastFocusableElement = modalFocusableElements[modalFocusableElements.length - 1];
+
+    const trapFocus = (e) => {
+        let isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+
+        if (!isTabPressed) {
+            return;
+        }
+
+        if (e.shiftKey) { // if shift key pressed for shift + tab combination
+            if (document.activeElement === firstFocusableElement) {
+                lastFocusableElement.focus(); // add focus for the last focusable element
+                e.preventDefault();
+            }
+        } else { // if tab key is pressed
+            if (document.activeElement === lastFocusableElement) { // if focused has reached to last focusable element then focus first focusable element after pressing tab
+                firstFocusableElement.focus(); // add focus for the first focusable element
+                e.preventDefault();
+            }
+        }
+    };
+
+    document.addEventListener('keydown', (e) => {
+        if (modal.style.display === 'block') {
+            trapFocus(e);
+        }
+    });
+};
+
+setupAccessibility();
