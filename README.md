@@ -98,14 +98,6 @@ npm run dev
 
 L'application sera accessible à l'adresse `http://localhost:5173/`.
 
-## Contribution
-
-Les contributions sont les bienvenues ! N'hésitez pas à forker le projet et à créer une pull request.
-
-## Licence
-
-Distribué sous la licence MIT. Voir le fichier `LICENSE` pour plus d'informations.
-
 ## Contact
 
 Khadim Gning - [gningkhadim23@gmail.com](mailto:gningkhadim23@gmail.com) - [https://github.com/khadimflash](https://github.com/khadimflash)
