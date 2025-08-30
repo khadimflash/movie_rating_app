@@ -108,7 +108,6 @@ p{
     background-color: #085f87;
 }
 .card{
-    width: 16rem;
     border-radius: 4px; 
     background-color: var(--card-bg);
     cursor: pointer;
@@ -116,6 +115,8 @@ p{
     transform: translateY(15px) scale(0.98);
     transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out, box-shadow 0.3s ease-in-out;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 .card.in-view {
@@ -144,6 +145,7 @@ p{
     display: flex;
     flex-direction: column;
     gap: 6px;
+    flex-grow: 1;
 }
 .title{
     font-size: 1rem;
@@ -162,8 +164,8 @@ p{
     gap: 5px;
 }
 #app{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     padding-top: 10rem;
     padding-inline: 30px;
