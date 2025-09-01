@@ -1,7 +1,5 @@
 import './style.css';
 import axios from 'axios';
-
-
 import { API_URL, IMG_URL, GENRE_URL, SEARCH_URL, DISCOVER_URL, API_KEY } from './constant.js';
 import { debouncing } from './utils.js';
 import { inject } from "@vercel/analytics";
@@ -170,7 +168,7 @@ const clearFilters = () => {
 const openMovieDetailsModal = async (movieId) => {
     showLoader();
     try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=731a10e628628474e1694ff5304eeb46&append_to_response=videos`);
+                const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&append_to_response=videos`);
         const movie = response.data;
         displayMovieDetails(movie);
         modal.style.display = 'block';
