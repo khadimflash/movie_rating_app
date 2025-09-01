@@ -125,7 +125,7 @@ const displayMovies = (movies, clear = true) => {
                 </div>
             </div>
         `;
-        movieCard.addEventListener('click', () => openTrailerModal(id));
+        movieCard.addEventListener('click', () => openMovieDetailsModal(id));
         app.appendChild(movieCard);
 
         if (index === movies.length - 1) {
@@ -167,37 +167,59 @@ const clearFilters = () => {
 };
 
 // --- Modal Functions ---
-const openTrailerModal = async (movieId) => {
+const openMovieDetailsModal = async (movieId) => {
     showLoader();
     try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`);
-        const videos = response.data.results;
-        const trailer = videos.find(video => video.type === 'Trailer' && video.site === 'YouTube');
-
-        if (trailer) {
-            trailerContainer.innerHTML = `
-                <iframe 
-                    src="https://www.youtube.com/embed/${trailer.key}?autoplay=1" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>`;
-        } else {
-            trailerContainer.innerHTML = '<p class="no-results">No trailer found for this movie.</p>';
-        }
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=731a10e628628474e1694ff5304eeb46&append_to_response=videos`);
+        const movie = response.data;
+        displayMovieDetails(movie);
         modal.style.display = 'block';
     } catch (error) {
-        console.error("Error fetching trailer:", error);
-        trailerContainer.innerHTML = '<p class="error">Failed to fetch trailer. Please try again later.</p>';
+        console.error("Error fetching movie details:", error);
+        modalContent.innerHTML = '<p class="error">Failed to fetch movie details. Please try again later.</p>';
         modal.style.display = 'block';
     } finally {
         hideLoader();
     }
 };
 
+const displayMovieDetails = (movie) => {
+    const { title, overview, runtime, genres, videos } = movie;
+    const trailer = videos.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
+
+    modalContent.innerHTML = `
+        <span class="close-button" aria-label="Close movie details modal">&times;</span>
+        <div class="modal-grid">
+            <div class="modal-image-container">
+                <img src="${movie.poster_path ? IMG_URL + movie.poster_path : PLACEHOLDER_IMAGE_URL}" alt="${title}" class="modal-image">
+            </div>
+            <div class="modal-details">
+                <h2 class="modal-title">${title}</h2>
+                <p class="modal-description">${overview}</p>
+                <p class="modal-info"><strong>Runtime:</strong> ${runtime} minutes</p>
+                <p class="modal-info"><strong>Genres:</strong> ${genres.map(genre => genre.name).join(', ')}</p>
+            </div>
+        </div>
+        ${trailer ? `
+            <div class="modal-trailer">
+                <h3>Trailer</h3>
+                <iframe 
+                    src="https://www.youtube.com/embed/${trailer.key}" 
+                    frameborder="0" 
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        ` : ''}
+    `;
+
+    const closeModalBtn = modalContent.querySelector('.close-button');
+    closeModalBtn.addEventListener('click', closeModal);
+};
+
 const closeModal = () => {
     modal.style.display = 'none';
-    trailerContainer.innerHTML = ''; // Clear the trailer
+    modalContent.innerHTML = '';
 };
 
 // --- Scroll to Top ---
