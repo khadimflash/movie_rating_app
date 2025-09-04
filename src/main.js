@@ -4,13 +4,13 @@ import axios from 'axios';
 import { API_URL, IMG_URL, GENRE_URL, SEARCH_URL, DISCOVER_URL, API_KEY } from './constant.js';
 import { debouncing } from './utils.js';
 import { inject } from "@vercel/analytics";
-import { speedInsights } from "@vercel/speed-insights/vite"
-import { app, searchInput, ratingSelect, tagsEl, modal, closeModalBtn, modalContent, trailerContainer, loader, clearFiltersBtn, scrollToTopBtn } from './dom-elements.js';
+import { injectSpeedInsights } from '@vercel/speed-insights';
+import { app, searchInput, ratingSelect, tagsEl, modal, modalContent, loader, clearFiltersBtn, scrollToTopBtn } from './dom-elements.js';
 import { PLACEHOLDER_IMAGE_URL, CSS_CLASSES } from './ui-constants.js';
 
 // Initialisation de Vercel Analytics et Speed Insights
 inject();
-speedInsights();
+injectSpeedInsights();
 
 // Initialisation des variables globales
 const genreMap = new Map();
@@ -188,6 +188,7 @@ const openMovieDetailsModal = async (movieId) => {
         const movie = response.data;
         displayMovieDetails(movie);
         modal.style.display = 'block';
+        setupAccessibility();
     } catch (error) {
         console.error("Erreur lors de la récupération des détails du film:", error);
         modalContent.innerHTML = '<p class="error">Échec de la récupération des détails du film. Veuillez réessayer plus tard.</p>';
@@ -285,10 +286,9 @@ async function init() {
     searchInput.addEventListener("input", debouncing(handleSearch, 500));
     ratingSelect.addEventListener('change', (e) => {
         selectedRating = e.target.value;
-        handleSearch();
+        handleFilter();
     });
     clearFiltersBtn.addEventListener('click', clearFilters);
-    closeModalBtn.addEventListener('click', closeModal);
     window.addEventListener('pointerup', (event) => {
         if (event.target === modal) {
             closeModal();
@@ -337,5 +337,3 @@ const setupAccessibility = () => {
         }
     });
 };
-
-setupAccessibility();

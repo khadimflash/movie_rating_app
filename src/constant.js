@@ -1,5 +1,5 @@
 // Clé d'API pour l'accès à The Movie Database (TMDb)
-export const API_KEY = import.meta.env.VITE_API_KEY;
+export const API_KEY = '731a10e628628474e1694ff5304eeb46';
 
 // URL de base pour récupérer les films les mieux notés
 export const API_URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`;

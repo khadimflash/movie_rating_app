@@ -13,9 +13,6 @@ export const tagsEl = document.getElementById('tags');
 // La fenêtre modale pour afficher la bande-annonce du film
 export const modal = document.getElementById('trailer-modal');
 
-// Le bouton pour fermer la fenêtre modale
-export const closeModalBtn = document.querySelector('.close-button');
-
 // Le contenu de la fenêtre modale
 export const modalContent = document.querySelector('.modal-content');
 
