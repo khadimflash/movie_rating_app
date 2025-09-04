@@ -7,10 +7,12 @@
 
 ## Description
 
+<!-- Description de l'application -->
 Le Movie App est une application web dynamique et moderne conçue pour explorer et filtrer les 250 meilleurs films d'IMDB. Elle offre une interface élégante et intuitive permettant aux utilisateurs de rechercher des films par titre, de filtrer par genre et par note.
 
-## What's New?
+## Quoi de neuf ?
 
+<!-- Nouvelles fonctionnalités et améliorations -->
 - **Refonte de l'interface utilisateur :** L'application a été entièrement repensée avec un design plus moderne et épuré.
 - **Amélioration des cartes de films :** Les cartes de films ont un nouveau look avec une meilleure présentation des informations.
 - **En-tête amélioré :** L'en-tête est maintenant fixe et contient la barre de recherche et les filtres pour un accès facile.
@@ -18,6 +20,7 @@ Le Movie App est une application web dynamique et moderne conçue pour explorer 
 
 ## Fonctionnalités
 
+<!-- Liste des fonctionnalités de l'application -->
 *   **Liste des 250 meilleurs films IMDB :** Parcourez une liste soigneusement sélectionnée des films les mieux notés sur IMDB.
 *   **Fonctionnalité de recherche avancée :** Trouvez rapidement des films grâce à une barre de recherche complète.
 *   **Filtrage par évaluation :** Affinez votre recherche en filtrant les films en fonction de leur évaluation IMDB.
@@ -28,6 +31,7 @@ Le Movie App est une application web dynamique et moderne conçue pour explorer 
 
 ## Technologies Employées
 
+<!-- Technologies utilisées dans le projet -->
 *   **Frontend :**
     *   **HTML5 :** Langage de balisage standard pour la structuration du contenu web.
     *   **CSS3 :** Langage de feuille de style pour la conception et le style de l'application.
@@ -42,6 +46,7 @@ Le Movie App est une application web dynamique et moderne conçue pour explorer 
 
 ## Compétences Acquises
 
+<!-- Compétences acquises grâce à ce projet -->
 Ce projet a permis de développer et de renforcer les compétences suivantes :
 
 *   **Développement Front-end :** Maîtrise de HTML5, CSS3 et JavaScript (ES6+) pour la création d'applications web interactives.
@@ -55,6 +60,7 @@ Ce projet a permis de développer et de renforcer les compétences suivantes :
 
 ## Installation
 
+<!-- Instructions pour l'installation du projet -->
 Pour configurer et exécuter ce projet localement, suivez ces étapes.
 
 ### Prérequis
@@ -79,6 +85,7 @@ Pour configurer et exécuter ce projet localement, suivez ces étapes.
 
 ### Configuration de la clé API
 
+<!-- Instructions pour la configuration de la clé API -->
 Ce projet utilise l'API The Movie Database (TMDb). Vous devez obtenir votre propre clé API.
 
 1.  Inscrivez-vous sur le [site web de TMDb](https://www.themoviedb.org/documentation/api) pour obtenir une clé API.
@@ -90,6 +97,7 @@ Ce projet utilise l'API The Movie Database (TMDb). Vous devez obtenir votre prop
 
 ## Utilisation
 
+<!-- Instructions pour l'utilisation de l'application -->
 Pour exécuter l'application en mode développement :
 
 ```bash
@@ -100,6 +108,7 @@ L'application sera accessible à l'adresse `http://localhost:5173/`.
 
 ## Contact
 
+<!-- Informations de contact -->
 Khadim Gning - [gningkhadim23@gmail.com](mailto:gningkhadim23@gmail.com) - [https://github.com/khadimflash](https://github.com/khadimflash)
 
 Lien du projet : [https://github.com/khadimflash/movie_rating_app](https://github.com/khadimflash/movie_rating_app)
@@ -108,4 +117,5 @@ Lien du projet : [https://github.com/khadimflash/movie_rating_app](https://githu
 
 ### Application déployée
 
+<!-- Lien vers l'application déployée -->
 Découvrez l'application déployée en ligne ici : [https://movie-rating-app-peach.vercel.app/](https://movie-rating-app-peach.vercel.app/)

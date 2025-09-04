@@ -1,5 +1,7 @@
+/* Importation de la police Montserrat depuis Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* Définition des variables de couleur et de police pour le thème */
 :root {
     --bg-color: #101010;
     --primary-color: #1E88E5;
@@ -10,18 +12,21 @@
     --shadow-color: rgba(0, 0, 0, 0.5);
 }
 
+/* Réinitialisation des styles par défaut du navigateur */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Styles de base pour le corps de la page */
 body {
     background-color: var(--bg-color);
     font-family: var(--default-text-font-family);
     color: var(--text-color-primary);
 }
 
+/* Lien pour sauter au contenu principal (accessibilité) */
 .skip-to-content-link {
     position: absolute;
     left: -10000px;
@@ -42,6 +47,7 @@ body {
     z-index: 1001;
 }
 
+/* Styles de l'en-tête */
 .header {
     padding: 1.5rem 2rem;
     display: flex;
@@ -55,22 +61,26 @@ body {
     border-bottom: 1px solid var(--card-bg);
 }
 
+/* Titre principal */
 .heading-1 {
     font-size: 2.5rem;
     color: var(--primary-color);
     font-weight: 700;
 }
 
+/* Conteneur de la barre de recherche */
 .search-container {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
+/* Conteneur du champ de recherche */
 .search-input-container {
     position: relative;
 }
 
+/* Icône de recherche */
 .search-icon {
     position: absolute;
     left: 15px;
@@ -79,6 +89,7 @@ body {
     color: var(--text-color-secondary);
 }
 
+/* Champ de recherche */
 .input {
     width: 350px;
     background-color: var(--card-bg);
@@ -96,6 +107,7 @@ body {
     width: 400px;
 }
 
+/* Menu déroulant pour la sélection de la note */
 .rating-select {
     background-color: var(--card-bg);
     border: 1px solid transparent;
@@ -116,6 +128,7 @@ body {
     color: var(--text-color-primary);
 }
 
+/* Bouton pour effacer les filtres */
 .clear-filters-btn {
     background-color: var(--primary-color);
     color: var(--text-color-primary);
@@ -128,17 +141,19 @@ body {
 }
 
 .clear-filters-btn:hover {
-    background-color: #1565C0; /* Darker shade of primary color */
+    background-color: #1565C0; /* Nuance plus foncée de la couleur primaire */
 }
 
+/* Conteneur des balises de genre */
 #tags {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding: 1rem;
-    padding-top: 8rem; /* Adjust based on header height */
+    padding-top: 8rem; /* Ajuster en fonction de la hauteur de l'en-tête */
 }
 
+/* Balise de genre */
 .tag {
     background-color: var(--card-bg);
     color: var(--text-color-secondary);
@@ -162,14 +177,16 @@ body {
     font-weight: 700;
 }
 
+/* Grille d'affichage des films */
 #app {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 2rem;
     padding: 2rem;
-    padding-top: 2rem; /* Adjust based on tags height */
+    padding-top: 2rem; /* Ajuster en fonction de la hauteur des balises */
 }
 
+/* Carte de film */
 .card {
     border-radius: 8px;
     background-color: var(--card-bg);
@@ -194,18 +211,21 @@ body {
     box-shadow: 0 8px 16px var(--shadow-color);
 }
 
+/* Conteneur de l'image de la carte */
 .card-image-container {
     width: 100%;
     height: 300px;
     position: relative;
 }
 
+/* Image de la carte */
 .card-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+/* Détails du film sur la carte */
 .movie-details {
     padding: 1rem;
     display: flex;
@@ -213,17 +233,20 @@ body {
     gap: 0.5rem;
 }
 
+/* Titre du film */
 .title {
     font-size: 1.2rem;
     font-weight: 600;
     color: var(--text-color-primary);
 }
 
+/* Genre du film */
 .genre {
     font-size: 0.9rem;
     color: var(--text-color-secondary);
 }
 
+/* Section des notes */
 .ratings {
     display: flex;
     justify-content: space-between;
@@ -231,17 +254,19 @@ body {
     margin-top: 0.5rem;
 }
 
+/* Note en étoiles */
 .star-rating {
     display: flex;
     align-items: center;
     gap: 5px;
-    color: #FFC107; /* Yellow for stars */
+    color: #FFC107; /* Jaune pour les étoiles */
 }
 
 .star-rating .material-symbols-outlined {
     font-variation-settings: 'FILL' 1;
 }
 
+/* Indicateur de chargement */
 .loader {
     border: 5px solid #f3f3f3;
     border-top: 5px solid var(--primary-color);
@@ -262,6 +287,7 @@ body {
     100% { transform: rotate(360deg); }
 }
 
+/* Fenêtre modale */
 .modal {
     display: none;
     position: fixed;
@@ -274,6 +300,7 @@ body {
     background-color: rgba(0, 0, 0, 0.85);
 }
 
+/* Conteneur de la modale */
 .modal-container {
     display: flex;
     justify-content: center;
@@ -282,6 +309,7 @@ body {
     min-height: 100%;
 }
 
+/* Contenu de la modale */
 .modal-content {
     background-color: var(--bg-color);
     padding: 20px;
@@ -292,6 +320,7 @@ body {
     position: relative;
 }
 
+/* Bouton de fermeture de la modale */
 .close-button {
     color: #fff;
     background-color: rgba(0, 0, 0, 0.7);
@@ -315,6 +344,7 @@ body {
     background-color: var(--primary-color);
 }
 
+/* Conteneur de la bande-annonce */
 #trailer-container {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */
@@ -331,6 +361,7 @@ body {
     border: none;
 }
 
+/* Bouton de défilement vers le haut */
 .scroll-to-top-btn {
     position: fixed;
     bottom: 20px;
@@ -355,6 +386,7 @@ body {
     visibility: visible;
 }
 
+/* Media queries pour la réactivité */
 @media (max-width: 1024px) {
     .input {
         width: 250px;
@@ -381,7 +413,7 @@ body {
         width: 100%;
     }
     #tags {
-        padding-top: 10rem; /* Adjust for taller header */
+        padding-top: 10rem; /* Ajuster pour un en-tête plus haut */
     }
     #app {
         padding: 1rem;
@@ -402,50 +434,58 @@ body {
         align-items: stretch;
     }
     #tags {
-        padding-top: 14rem; /* Adjust for even taller header */
+        padding-top: 14rem; /* Ajuster pour un en-tête encore plus haut */
     }
     #app {
         grid-template-columns: 1fr;
     }
 }
 
+/* Grille de la modale */
 .modal-grid {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 20px;
 }
 
+/* Conteneur de l'image de la modale */
 .modal-image-container {
     width: 100%;
 }
 
+/* Image de la modale */
 .modal-image {
     width: 100%;
     height: auto;
     border-radius: 8px;
 }
 
+/* Détails dans la modale */
 .modal-details {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+/* Titre dans la modale */
 .modal-title {
     font-size: 2rem;
     font-weight: 700;
     color: var(--primary-color);
 }
 
+/* Description dans la modale */
 .modal-description {
     font-size: 1rem;
     line-height: 1.5;
 }
 
+/* Informations dans la modale */
 .modal-info {
     font-size: 0.9rem;
 }
 
+/* Bande-annonce dans la modale */
 .modal-trailer {
     margin-top: 20px;
 }
